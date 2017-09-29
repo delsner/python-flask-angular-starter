@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Docker development
 
-Run `docker build -f Dockerfile-dev -t webapp-starter-dev.` to build development image. Then run `docker run -p 4200:4200 webapp-starter-dev` to start web server and watch files. Navigate to `http://localhost:4200`. 
+Run `docker build -f Dockerfile-dev -t webapp-starter-dev .` to build development image. Then run `docker run -p 4200:4200 webapp-starter-dev` to start web server and watch files. Navigate to `http://localhost:4200`. 
 
 ## Development server
 
