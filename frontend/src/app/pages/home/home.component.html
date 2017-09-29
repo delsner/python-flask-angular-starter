@@ -1,0 +1,15 @@
+<h1>Starter project for working with Angular and Python Flask</h1>
+<p>
+    This is a starter project for working with Angular and Python Flask.
+</p>
+
+<h3>Create new board</h3>
+<md-input-container>
+    <input mdInput name="name" [(ngModel)]="board.name">
+</md-input-container>
+<button md-raised-button (click)="createBoard()">Create</button>
+
+<h3>Boards received from backend</h3>
+<p *ngFor="let board of boards">
+    {{board.name}}
+</p>
