@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {NavigationEnd, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 import {ROUTES} from "./app.routes";
+import 'rxjs/add/operator/filter';
 
 @Component({
     selector: 'app',
