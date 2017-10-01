@@ -1,5 +1,7 @@
 # Webapp Starter with Flask REST API Backend and MongoDB
 
+NOTE: There could occur problems running this on windows.
+
 ## Development web backend/frontend
 
 If desired, you can add a custom host in your hosts file (e.g. `127.0.0.1   db`). 
