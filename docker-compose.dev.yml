@@ -17,21 +17,40 @@ services:
     volumes:
         - ./backend:/app # for watching files
     ports:
-      - "8081:8081"
+      - "5000:5000"
     depends_on:
-      - db
-    links:
-      - db
-  db:
-    image: mongo
-    container_name: "mongodb"
-    volumes:
-        - ./docker-entrypoint.sh:/entrypoint.sh
+      - postgres
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: admin
-      MONGO_INITDB_DATABASE: db
-      MONGO_INITDB_COLLECTION: board
+      - APP_SETTINGS=development
+      - DATABASE_URL=postgresql://pgadmin:admin@postgres:5432/pgadmin
+  postgres:
+    image: postgres:9.6
+    volumes:
+      - ./docker/database:/docker-entrypoint-initdb.d
     ports:
-      - "27017:27017"
-    command: mongod --auth
+      - "5433:5432"
+    environment:
+      # default db
+      - POSTGRES_USER=pgadmin
+      - POSTGRES_PASSWORD=admin
+      # airflow db
+      - DB_USER=airflow
+      - DB_PASSWORD=airflow
+      - DB_NAME=airflow
+  webserver:
+    image: puckel/docker-airflow:1.8.2
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      - LOAD_EX=n
+      - EXECUTOR=Local
+      # AIRFLOW ENVIRONMENT VARIABLES
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+    volumes:
+      - ./airflow/dags:/usr/local/airflow/dags
+      - ./airflow/requirements.txt:/requirements.txt
+    ports:
+      - "8080:8080"
+    command: webserver
+

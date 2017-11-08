@@ -25,15 +25,20 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 EXPOSE 22
 
 # for flask web server
-EXPOSE 8081
+EXPOSE 5000
 
 ADD . /app
 WORKDIR /app
 
+# install dependencies
+RUN ./install.sh
+# source env variables
+# RUN source .env
+
 # This is the runtime command
-CMD ./install.sh \
+CMD python3 manage.py db upgrade \
     && service ssh restart \
     && (python3 watcher.py &) \
-    && python3 app.py
+    && python3 run.py
 
 

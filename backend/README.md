@@ -10,3 +10,19 @@ Clone project on your remote machine (needs to have docker daemon installed), th
 
 To debug remotely connect to the docker container with ssh (credentials: `root:screencast`) on port `8022`, e.g. for using the python3 executable inside an IDE. 
 
+## Migration commands
+
+See [flask-migrate](https://flask-migrate.readthedocs.io/en/latest/) for more detailed explanation.
+
+### Recreate migrations
+
+Remove `migrations` directory and run `python manage.py db init` and then `python manage.py db migrate`.
+
+### Update database schema
+
+1. Update your database schema (e.g. in `models.py`). Then run `python manage.py db migrate`.
+2. Check migration script and use `python manage.py db upgrade` to commit changes to database schema. 
+3. Commit changes to git repository.
+
+ 
+
