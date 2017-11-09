@@ -25,4 +25,6 @@ Remove `migrations` directory and run `python manage.py db init` and then `pytho
 3. Commit changes to git repository.
 
  
+## Execute unit tests
 
+Run `python manage.py test` to execute all test cases in `./tests` directory (must start with `test_`).
